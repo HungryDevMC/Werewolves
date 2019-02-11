@@ -1,0 +1,188 @@
+lobby_time: 10
+min_player: 3
+max_player: 12
+cycle_time:
+  day: 420
+  night: 60
+role_info:
+  citizen:
+    max: 3
+    name: Dorpeling
+  mayor:
+    max: 1
+    name: Burgemeester
+  protector:
+    max: 1
+    uses: 1
+    name: Beschermengel
+  temptress:
+    max: 1
+    name: Verleidster
+  hero:
+    max: 1
+    uses: 3
+    name: Held
+  watcher:
+    max: 1
+    name: Wachter
+  alpha:
+    max: 1
+    name: Alpha Wolf
+  beta:
+    max: 1
+    name: Beta Wolf
+  omega:
+    max: 1
+    name: Omega Wolf
+  murderer:
+    max: 1
+    name: Moordenaar
+  madman:
+    max: 2
+    name: Dorpsgek
+  imitator:
+    max: 1
+    name: Imitator
+lobby_location:
+  X: 16
+  Y: 30
+  Z: 125
+  W: world
+  Yaw: -179
+  Pitch: -1
+team_locations:
+  blue:
+    X: -50
+    Y: 38
+    Z: -17
+    W: world
+    Yaw: -268
+    Pitch: 5
+  yellow:
+    X: -58
+    Y: 38
+    Z: -28
+    W: world
+    Yaw: -269
+    Pitch: 5
+  pink:
+    X: -50
+    Y: 38
+    Z: -39
+    W: world
+    Yaw: -270
+    Pitch: 4
+  brown:
+    X: -36
+    Y: 38
+    Z: -59
+    W: world
+    Yaw: -180
+    Pitch: 3
+  black:
+    X: -25
+    Y: 38
+    Z: -67
+    W: world
+    Yaw: -180
+    Pitch: -1
+  gray:
+    X: -14
+    Y: 38
+    Z: -59
+    W: world
+    Yaw: -179
+    Pitch: 5
+  orange:
+    X: -1
+    Y: 38
+    Z: -37
+    W: world
+    Yaw: -92
+    Pitch: 3
+  purple:
+    X: 6
+    Y: 38
+    Z: -26
+    W: world
+    Yaw: -90
+    Pitch: 4
+  aqua:
+    X: -1
+    Y: 38
+    Z: -15
+    W: world
+    Yaw: -90
+    Pitch: 7
+  green:
+    X: -16
+    Y: 38
+    Z: 6
+    W: world
+    Yaw: -2
+    Pitch: 1
+  white:
+    X: -27
+    Y: 38
+    Z: 14
+    W: world
+    Yaw: -2
+    Pitch: 0
+  red:
+    X: -38
+    Y: 38
+    Z: 6
+    W: world
+    Yaw: -356
+    Pitch: -1
+names:
+  - 'George'
+  - 'David'
+  - 'Max'
+  - 'Sam'
+  - 'Mike'
+  - 'John'
+  - 'James'
+  - 'Matthew'
+  - 'Paul'
+  - 'Mark'
+  - 'Daniel'
+  - 'Nathan'
+  - 'Thomas'
+  - 'Jason'
+  - 'Steven'
+  - 'William'
+  - 'Scott'
+  - 'Frank'
+  - 'Brian'
+  - 'Kevin'
+  - 'Richard'
+  - 'Dennis'
+  - 'Gary'
+  - 'Keith'
+  - 'Wayne'
+  - 'Austin'
+  - 'Ethan'
+  - 'Evan'
+  - 'Dylan'
+  - 'Linda'
+  - 'Sarah'
+  - 'Karen'
+  - 'Betty'
+  - 'Susan'
+  - 'Ashley'
+  - 'Laura'
+  - 'Helen'
+  - 'Emma'
+  - 'Heather'
+  - 'Martha'
+  - 'Megan'
+  - 'Hannah'
+  - 'Alice'
+  - 'Olivia'
+  - 'Tiffany'
+  - 'Rose'
+  - 'Theresa'
+  - 'Ann'
+  - 'Andrea'
+  - 'Judith'

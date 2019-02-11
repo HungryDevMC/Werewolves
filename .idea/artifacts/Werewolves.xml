@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Werewolves">
+    <output-path>$PROJECT_DIR$/../servers/Dev server/plugins</output-path>
+    <root id="archive" name="Werewolves.jar">
+      <element id="library" level="project" name="spigot-1.13" />
+      <element id="module-output" name="Werewolves" />
+    </root>
+  </artifact>
+</component>
