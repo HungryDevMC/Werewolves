@@ -5,7 +5,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.pixelgalaxy.WerewolfMain;
-import org.pixelgalaxy.game.DeathsInTheNight;
 import org.pixelgalaxy.game.Game;
 import org.pixelgalaxy.game.Role;
 import org.pixelgalaxy.utils.ConfigSavers;

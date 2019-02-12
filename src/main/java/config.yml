@@ -26,23 +26,16 @@ role_info:
     max: 1
     name: Wachter
   alpha:
-    max: 1
     name: Alpha Wolf
   beta:
-    max: 1
     name: Beta Wolf
   omega:
-    max: 1
     name: Omega Wolf
   murderer:
-    max: 1
     name: Moordenaar
   madman:
     max: 2
     name: Dorpsgek
-  imitator:
-    max: 1
-    name: Imitator
 lobby_location:
   X: 16
   Y: 30
