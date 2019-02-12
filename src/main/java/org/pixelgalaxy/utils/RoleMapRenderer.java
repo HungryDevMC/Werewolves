@@ -1,5 +1,7 @@
 package org.pixelgalaxy.utils;
 
+import lombok.Cleanup;
+import lombok.SneakyThrows;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.map.MapCanvas;
@@ -24,17 +26,12 @@ public class RoleMapRenderer extends MapRenderer {
         this.imageName = role.toString().toLowerCase();
     }
 
+    @SneakyThrows(IOException.class)
     @Override
     public void render(MapView mapView, MapCanvas mapCanvas, Player player) {
         if(!hasRendered.contains(player)) {
-            BufferedImage img;
-            try {
+            BufferedImage img = ImageIO.read(new File(WerewolfMain.plugin.getDataFolder() + "/map_images/" + imageName + ".png"));
 
-                img = ImageIO.read(new File(WerewolfMain.plugin.getDataFolder() + "/map_images/" + imageName + ".png"));
-            } catch (IOException e) {
-                e.printStackTrace();
-                return;
-            }
             mapView.setScale(MapView.Scale.FARTHEST);
             mapCanvas.drawImage(0, 0, img);
             hasRendered.add(player);

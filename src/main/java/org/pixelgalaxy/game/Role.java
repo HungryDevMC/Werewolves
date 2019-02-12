@@ -1,5 +1,6 @@
 package org.pixelgalaxy.game;
 
+import lombok.AllArgsConstructor;
 import org.pixelgalaxy.WerewolfMain;
 import lombok.Getter;
 
@@ -8,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@AllArgsConstructor
 public enum Role {
 
     CITIZEN(WerewolfMain.config.getString("role_info.citizen.name"), WerewolfMain.config.getInt("role_info.citizen.max"), 1),
@@ -22,22 +24,14 @@ public enum Role {
     MURDERER(WerewolfMain.config.getString("role_info.murderer.name"), WerewolfMain.config.getInt("role_info.murderer.max"), 3),
     MADMAN(WerewolfMain.config.getString("role_info.madman.name"), WerewolfMain.config.getInt("role_info.madman.max"), 4);
 
-    Role(String roleName, int maxInGame, int team, boolean priorityRole){
-        this.roleName = roleName;
-        this.maxInGame = maxInGame;
-        this.priorityRole = priorityRole;
-        this.team = team;
-    }
-
     Role(String roleName, int maxInGame, int team){
         this(roleName, maxInGame, team, false);
     }
 
-    @Getter private boolean priorityRole;
     @Getter private String roleName;
-    private int maxInGame;
-    @Getter
-    private int team;
+    @Getter private int maxInGame;
+    @Getter private int team;
+    @Getter private boolean priorityRole;
 
     public static final Map<Integer, String> ROLE_TEAM_NAMES = new HashMap<Integer, String>() {{
 
@@ -73,8 +67,4 @@ public enum Role {
         return primaryRoles;
     }
 
-
-    public int getMaxInGame() {
-        return maxInGame;
-    }
 }

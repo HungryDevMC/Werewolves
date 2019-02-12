@@ -28,16 +28,10 @@ public class Game {
 
     private static List<String> customNames = WerewolfMain.config.getStringList("names");
 
-    private static boolean started = false;
+    @Getter private static boolean started = false;
 
-    @Getter
-    private static Map<Player, GamePlayer> gamePlayers = new HashMap<>();
-    @Getter
-    private static Map<Role, Player> roleTargetMap = new HashMap<>();
-
-    public static boolean isStarted() {
-        return started;
-    }
+    @Getter private static Map<Player, GamePlayer> gamePlayers = new HashMap<>();
+    @Getter private static Map<Role, Player> roleTargetMap = new HashMap<>();
 
     public static void start(){
         started = true;
