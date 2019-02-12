@@ -1,8 +1,0 @@
-main: org.pixelgalaxy.WerewolfMain
-name: Werewolves
-version: 0.1
-api-version: 1.13
-commands:
-  game:
-    description: "Game related commands for admins only"
-    permission: "game.edit"
