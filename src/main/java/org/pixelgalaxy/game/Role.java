@@ -33,8 +33,8 @@ public enum Role {
         this(roleName, maxInGame, team, false);
     }
 
-    private boolean priorityRole;
-    private String roleName;
+    @Getter private boolean priorityRole;
+    @Getter private String roleName;
     private int maxInGame;
     @Getter
     private int team;
@@ -46,14 +46,6 @@ public enum Role {
         put(3, "Murderer");
 
     }};
-
-    public String getRoleName() {
-        return roleName;
-    }
-
-    public boolean isPriorityRole() {
-        return priorityRole;
-    }
 
     public static List<Role> getSecondaryRoles(){
 

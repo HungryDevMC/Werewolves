@@ -1,5 +1,6 @@
 package org.pixelgalaxy.timers;
 
+import lombok.Setter;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -15,15 +16,11 @@ import java.time.LocalTime;
 public class GameDayNightTimer extends BukkitRunnable {
 
     private int dayTime = Game.DAY_CYCLE_TIME;
+    @Setter
     private int nightTime = Game.NIGHT_CYCLE_TIME;
 
     public static int amountToSelect = 0;
-
     public static GameDayNightTimer currentGameTimer = null;
-
-    public void setNightTime(int nightTime) {
-        this.nightTime = nightTime;
-    }
 
     public GameDayNightTimer() {
         amountToSelect = 0;
@@ -66,6 +63,7 @@ public class GameDayNightTimer extends BukkitRunnable {
                     }
                 }
                 DeathsInTheNight.checkForKills();
+                Game.getRoleTargetMap().clear();
             }
 
         } else if (dayTime > 0) {

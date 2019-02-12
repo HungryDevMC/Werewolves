@@ -1,18 +1,16 @@
 package org.pixelgalaxy.timers;
 
+import lombok.AllArgsConstructor;
 import org.bukkit.Bukkit;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.pixelgalaxy.WerewolfMain;
 import org.pixelgalaxy.game.Game;
 import org.pixelgalaxy.game.Lobby;
 
+@AllArgsConstructor
 public class LobbyTimer extends BukkitRunnable {
 
     private int lobbyCountdown;
-
-    public LobbyTimer(int lobbyCountdown){
-        this.lobbyCountdown = lobbyCountdown;
-    }
 
     @Override
     public void run(){

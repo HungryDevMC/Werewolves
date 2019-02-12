@@ -1,5 +1,6 @@
 package org.pixelgalaxy.game;
 
+import lombok.Getter;
 import net.minecraft.server.v1_13_R1.Items;
 import net.minecraft.server.v1_13_R1.WorldMap;
 import net.minecraft.server.v1_13_R1.WorldServer;
@@ -28,8 +29,10 @@ public class Game {
     private static List<String> customNames = WerewolfMain.config.getStringList("names");
 
     private static boolean started = false;
-    private static Map<Player, GamePlayer> gamePlayers = new HashMap<>();
 
+    @Getter
+    private static Map<Player, GamePlayer> gamePlayers = new HashMap<>();
+    @Getter
     private static Map<Role, Player> roleTargetMap = new HashMap<>();
 
     public static boolean isStarted() {
@@ -41,14 +44,6 @@ public class Game {
         initGamePlayers();
         GameDayNightTimer timer = new GameDayNightTimer();
         timer.runTaskTimer(WerewolfMain.plugin, 0, 20);
-    }
-
-    public static Map<Player, GamePlayer> getGamePlayers() {
-        return gamePlayers;
-    }
-
-    public static Map<Role, Player> getRoleTargetMap() {
-        return roleTargetMap;
     }
 
     public static void addTarget(Player targeter, Player target){
@@ -64,7 +59,7 @@ public class Game {
 
     private static void addGamePlayer(Player p, Team team, Role role){
 
-        gamePlayers.put(p, new GamePlayer(team, role));
+        gamePlayers.put(p, GamePlayer.builder().playerTeam(team).playerRole(role).build());
 
     }
 

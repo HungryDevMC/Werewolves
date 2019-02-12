@@ -1,7 +1,10 @@
 package org.pixelgalaxy.game;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import org.bukkit.Color;
 
+@AllArgsConstructor
 public enum Team {
 
     ORANGE(Color.ORANGE, 1),
@@ -17,19 +20,7 @@ public enum Team {
     BLACK(Color.BLACK, 15),
     GRAY(Color.GRAY, 8);
 
-    private Color teamColor;
-    private int woolColor;
+    @Getter private Color teamColor;
+    @Getter private int woolColor;
 
-    Team(Color teamColor, int woolColor){
-        this.teamColor = teamColor;
-        this.woolColor = woolColor;
-    }
-
-    public Color getTeamColor() {
-        return teamColor;
-    }
-
-    public int getWoolColor() {
-        return woolColor;
-    }
 }
