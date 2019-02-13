@@ -9,6 +9,7 @@ import org.pixelgalaxy.commands.GameCommands;
 import org.pixelgalaxy.events.ColorChooserEvent;
 import org.pixelgalaxy.events.LobbyJoinLeave;
 import org.pixelgalaxy.events.disableInventoryInteract;
+import org.pixelgalaxy.game.Team;
 
 import java.io.File;
 import java.util.Arrays;
@@ -55,6 +56,8 @@ public class WerewolfMain extends JavaPlugin {
         if (!images.exists()) {
             images.mkdirs();
         }
+
+        Team.loadAll();
 
     }
 

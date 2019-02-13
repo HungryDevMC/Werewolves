@@ -1,19 +1,18 @@
 package org.pixelgalaxy.game;
 
 import lombok.Getter;
+import lombok.Setter;
 import net.minecraft.server.v1_13_R1.Items;
 import net.minecraft.server.v1_13_R1.WorldMap;
 import net.minecraft.server.v1_13_R1.WorldServer;
 import org.bukkit.GameMode;
-import org.bukkit.Material;
 import org.bukkit.craftbukkit.v1_13_R1.CraftWorld;
 import org.bukkit.craftbukkit.v1_13_R1.inventory.CraftItemStack;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.pixelgalaxy.WerewolfMain;
 import org.pixelgalaxy.timers.GameDayNightTimer;
+import org.pixelgalaxy.utils.CustomIS;
 import org.pixelgalaxy.utils.RoleMapRenderer;
 import org.pixelgalaxy.utils.ScoreHelper;
 
@@ -28,64 +27,27 @@ public class Game {
 
     private static List<String> customNames = WerewolfMain.config.getStringList("names");
 
-    @Getter private static boolean started = false;
+    @Getter @Setter private static boolean started = false;
 
-    @Getter private static Map<Player, GamePlayer> gamePlayers = new HashMap<>();
-    @Getter private static Map<Role, Player> roleTargetMap = new HashMap<>();
+    @Getter private static Set<GamePlayer> gamePlayers = new HashSet<>();
+    @Getter private static Map<GamePlayer, GamePlayer> targetMap = new HashMap<>();
 
     public static void start(){
-        started = true;
+        setStarted(true);
         initGamePlayers();
-        GameDayNightTimer timer = new GameDayNightTimer();
-        timer.runTaskTimer(WerewolfMain.plugin, 0, 20);
-    }
-
-    public static void addTarget(Player targeter, Player target){
-
-        Role playerRole = Game.getGamePlayers().get(targeter).getPlayerRole();
-
-        if(playerRole.equals(Role.ALPHA_WOLF) && DeathsInTheNight.isBetaIsAlive()){
-            playerRole = Role.BETA_WOLF;
-        }
-        roleTargetMap.put(playerRole, target);
-
+        GameDayNightTimer.start();
     }
 
     private static void addGamePlayer(Player p, Team team, Role role){
 
-        gamePlayers.put(p, GamePlayer.builder().playerTeam(team).playerRole(role).build());
+        getGamePlayers().add(GamePlayer.builder().player(p).playerTeam(team).playerRole(role).build());
 
-    }
-
-    public static ItemStack getColoredChest(Team team){
-
-        ItemStack chest = new ItemStack(Material.LEATHER_CHESTPLATE);
-        LeatherArmorMeta meta = (LeatherArmorMeta) chest.getItemMeta();
-        meta.setColor(team.getTeamColor());
-        chest.setItemMeta(meta);
-
-        return chest;
-    }
-
-    public static ItemStack getColorChooser(){
-
-        ItemStack arrow = new ItemStack(Material.ARROW);
-        ItemMeta arrowm = arrow.getItemMeta();
-        arrowm.setDisplayName("§cColor chooser");
-        arrowm.setLore(Arrays.asList("§5With this tool you can", "§5set your targets."));
-        arrow.setItemMeta(arrowm);
-        return arrow;
     }
 
     public static void initGamePlayers(){
 
-        List<Team> teams = new ArrayList<>(Arrays.asList(Team.values()));
-
-        List<Role> primaryRoles = new ArrayList<>(Role.getPrimaryRoles());
-        List<Role> secondaryRoles = new ArrayList<>(Role.getSecondaryRoles());
-        List<Player> lobbyPlayers = Lobby.getCurrentPlayers();
-        Collections.shuffle(lobbyPlayers);
-        for(Player p : lobbyPlayers){
+        Collections.shuffle(Lobby.getCurrentPlayers());
+        for(Player p : Lobby.getCurrentPlayers()){
 
             p.setGameMode(GameMode.ADVENTURE);
             p.setAllowFlight(false);
@@ -110,7 +72,7 @@ public class Game {
 
             addGamePlayer(p, team, role);
 
-            p.getEquipment().setChestplate(getColoredChest(team));
+            p.getEquipment().setChestplate(CustomIS.getColoredChest(team));
 
             net.minecraft.server.v1_13_R1.ItemStack itemStack = new net.minecraft.server.v1_13_R1.ItemStack(Items.FILLED_MAP);
 

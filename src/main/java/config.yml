@@ -43,8 +43,9 @@ lobby_location:
   W: world
   Yaw: -179
   Pitch: -1
-team_locations:
+teams:
   blue:
+
     X: -50
     Y: 38
     Z: -17

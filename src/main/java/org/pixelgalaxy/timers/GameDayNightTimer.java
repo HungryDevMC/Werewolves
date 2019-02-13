@@ -15,8 +15,7 @@ import java.time.LocalTime;
 public class GameDayNightTimer extends BukkitRunnable {
 
     private int dayTime = Game.DAY_CYCLE_TIME;
-    @Setter
-    private int nightTime = Game.NIGHT_CYCLE_TIME;
+    @Setter private int nightTime = Game.NIGHT_CYCLE_TIME;
 
     public static int amountToSelect = 0;
     public static GameDayNightTimer currentGameTimer = null;
@@ -39,6 +38,11 @@ public class GameDayNightTimer extends BukkitRunnable {
                 }
             }
         }
+    }
+
+    public static void start(){
+        GameDayNightTimer timer = new GameDayNightTimer();
+        timer.runTaskTimer(WerewolfMain.plugin, 0, 20);
     }
 
     @Override
