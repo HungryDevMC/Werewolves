@@ -41,7 +41,7 @@ public class GameCommands implements CommandExecutor {
 
                         if(args[0].equalsIgnoreCase("setspawn")){
 
-                            WerewolfMain.config.set("teams." + args[1].toLowerCase(), p.getLocation());
+                            WerewolfMain.config.set("teams." + args[1].toLowerCase() + ".location", p.getLocation());
                             p.sendMessage(WerewolfMain.PREFIX + "You have set color " + args[1].toLowerCase() + "'s location to your current location.");
 
                         }

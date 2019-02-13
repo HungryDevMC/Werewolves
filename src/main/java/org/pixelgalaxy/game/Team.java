@@ -22,6 +22,10 @@ public class Team {
 
     @Getter private static Set<Team> availableTeams = new HashSet<>();
 
+    /**
+     * Creates all the Team objects that are put in the config.yml
+     */
+
     public static void loadAll(){
 
         for(String key : WerewolfMain.config.getKeys(true)){
@@ -43,9 +47,19 @@ public class Team {
 
     }
 
+    /**
+     *
+     * @param colorName the colorname in the config
+     */
+
     public void setColorName(String colorName) {
         this.colorName = StringUtils.capitalize(colorName);
     }
+
+    /**
+     *
+     * @return random team from the available teams list
+     */
 
     public static Team getRandom(){
 

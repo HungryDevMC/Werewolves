@@ -6,6 +6,7 @@ import org.bukkit.map.MapCanvas;
 import org.bukkit.map.MapRenderer;
 import org.bukkit.map.MapView;
 import org.pixelgalaxy.WerewolfMain;
+import org.pixelgalaxy.game.roles.Role;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -22,6 +23,13 @@ public class RoleMapRenderer extends MapRenderer {
     public RoleMapRenderer(Role role){
         this.imageName = role.toString().toLowerCase();
     }
+
+    /**
+     * Creates a custom render to display image for each role on players their maps in inventory
+     * @param mapView mapView of map in inv
+     * @param mapCanvas Canvas of map in inv
+     * @param player player that holds the map
+     */
 
     @SneakyThrows(IOException.class)
     @Override

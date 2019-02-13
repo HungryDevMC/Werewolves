@@ -1,115 +1,184 @@
+###########################################################
+# Game settings                                           #
+###########################################################
+
+# All times are in seconds
+
 lobby_time: 10
+
+lobby_location:
+
+# Make sure the amount is not lower then the amount of primary roles!
+
 min_player: 3
+
+# When adding more players, make sure you add more colors and higher role amounts too!
+
 max_player: 12
+
 cycle_time:
   day: 420
   night: 60
+
+###########################################################
+# Role settings                                           #
+###########################################################
+
+# Format Information
+
+# name_of_role:
+#   max: <Max amount of players that can gain this role in one game>
+#   uses: <Amount the role can use his ability>
+#   name: <Name of the role ingame>
+
+# Note: Values can NOT be below 0!
+
 role_info:
+
   citizen:
     max: 3
-    name: Dorpeling
+    name: Villager
+
   mayor:
     max: 1
-    name: Burgemeester
+    name: Mayor
+
   protector:
     max: 1
     uses: 1
-    name: Beschermengel
+    name: Protector
+
   temptress:
     max: 1
-    name: Verleidster
+    name: Temptress
+
   hero:
     max: 1
     uses: 3
-    name: Held
+    name: Hero
+
   watcher:
     max: 1
-    name: Wachter
-  alpha:
+    name: Watcher
+
+  alphawolf:
     name: Alpha Wolf
-  beta:
+
+  betawolf:
     name: Beta Wolf
-  omega:
+
+  omegawolf:
     name: Omega Wolf
+
   murderer:
-    name: Moordenaar
+    max: 1
+    name: Murderer
+
   madman:
     max: 2
-    name: Dorpsgek
-lobby_location:
+    name: Madman
+
+###########################################################
+# Player Colours                                          #
+###########################################################
+
+# RGB colours format: "RED:GREEN:BLUE"
+
+# Note: Make sure you do not exceed the maximum players without adding the same amount or more colours
+
+# You can add as many colours you want!
+
 teams:
   blue:
     rgb: "53:57:157"
+
   yellow:
     rgb: "248:198:39"
+
   pink:
     rgb: "237:141:172"
+
   brown:
     rgb: "114:71:40"
+
   black:
     rgb: "20:21:25"
+
   gray:
     rgb: "142:142:134"
+
   orange:
     rgb: "240:118:19"
+
   purple:
     rgb: "121:42:172"
+
   aqua:
     rgb: "58:175:217"
+
   green:
     rgb: "112:185:25"
+
   white:
     rgb: "233:236:236"
+
   red:
     rgb: "161:39:34"
+
+###########################################################
+# Customization of Names                                  #
+###########################################################
+
+# You can add as many names down below or change any you like
+
 names:
-  - 'George'
-  - 'David'
-  - 'Max'
-  - 'Sam'
-  - 'Mike'
-  - 'John'
-  - 'James'
-  - 'Matthew'
-  - 'Paul'
-  - 'Mark'
-  - 'Daniel'
-  - 'Nathan'
-  - 'Thomas'
-  - 'Jason'
-  - 'Steven'
-  - 'William'
-  - 'Scott'
-  - 'Frank'
-  - 'Brian'
-  - 'Kevin'
-  - 'Richard'
-  - 'Dennis'
-  - 'Gary'
-  - 'Keith'
-  - 'Wayne'
-  - 'Austin'
-  - 'Ethan'
-  - 'Evan'
-  - 'Dylan'
-  - 'Linda'
-  - 'Sarah'
-  - 'Karen'
-  - 'Betty'
-  - 'Susan'
-  - 'Ashley'
-  - 'Laura'
-  - 'Helen'
-  - 'Emma'
-  - 'Heather'
-  - 'Martha'
-  - 'Megan'
-  - 'Hannah'
-  - 'Alice'
-  - 'Olivia'
-  - 'Tiffany'
-  - 'Rose'
-  - 'Theresa'
-  - 'Ann'
-  - 'Andrea'
-  - 'Judith'
+- 'George'
+- 'David'
+- 'Max'
+- 'Sam'
+- 'Mike'
+- 'John'
+- 'James'
+- 'Matthew'
+- 'Paul'
+- 'Mark'
+- 'Daniel'
+- 'Nathan'
+- 'Thomas'
+- 'Jason'
+- 'Steven'
+- 'William'
+- 'Scott'
+- 'Frank'
+- 'Brian'
+- 'Kevin'
+- 'Richard'
+- 'Dennis'
+- 'Gary'
+- 'Keith'
+- 'Wayne'
+- 'Austin'
+- 'Ethan'
+- 'Evan'
+- 'Dylan'
+- 'Linda'
+- 'Sarah'
+- 'Karen'
+- 'Betty'
+- 'Susan'
+- 'Ashley'
+- 'Laura'
+- 'Helen'
+- 'Emma'
+- 'Heather'
+- 'Martha'
+- 'Megan'
+- 'Hannah'
+- 'Alice'
+- 'Olivia'
+- 'Tiffany'
+- 'Rose'
+- 'Theresa'
+- 'Ann'
+- 'Andrea'
+- 'Judith'

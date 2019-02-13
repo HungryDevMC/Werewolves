@@ -10,6 +10,7 @@ import org.pixelgalaxy.events.ColorChooserEvent;
 import org.pixelgalaxy.events.LobbyJoinLeave;
 import org.pixelgalaxy.events.disableInventoryInteract;
 import org.pixelgalaxy.game.Team;
+import org.pixelgalaxy.game.roles.Role;
 
 import java.io.File;
 import java.util.Arrays;
@@ -21,8 +22,11 @@ public class WerewolfMain extends JavaPlugin {
     public static FileConfiguration config;
     public static final String PREFIX = "§8§l[§4§lWereWolves§8§l] §a";
 
-    // Give player random names and skins
-    // Skip command for day
+    /**
+     * Create default config, register commands listeners,
+     * creates folder for images on the maps if it does not exist,
+     * and loads the teams/roles from the config
+     */
 
     @Override
     public void onEnable(){
@@ -58,6 +62,7 @@ public class WerewolfMain extends JavaPlugin {
         }
 
         Team.loadAll();
+        Role.loadAll();
 
     }
 
@@ -87,6 +92,5 @@ public class WerewolfMain extends JavaPlugin {
         }
 
     }
-
 
 }

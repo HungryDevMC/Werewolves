@@ -11,6 +11,11 @@ import org.pixelgalaxy.game.Lobby;
 
 public class LobbyJoinLeave implements Listener {
 
+    /**
+     * If the game has not started, set player mode and add them to gameQueue
+     * @param e Player join
+     */
+
     @EventHandler
     public void onLobbyJoin(PlayerJoinEvent e){
 
@@ -25,6 +30,11 @@ public class LobbyJoinLeave implements Listener {
         }
 
     }
+
+    /**
+     * If the game has not started, remove player from gameQueue
+     * @param e
+     */
 
     @EventHandler
     public void onLobbyLeave(PlayerQuitEvent e){

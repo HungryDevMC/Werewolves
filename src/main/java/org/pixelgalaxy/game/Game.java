@@ -2,22 +2,12 @@ package org.pixelgalaxy.game;
 
 import lombok.Getter;
 import lombok.Setter;
-import net.minecraft.server.v1_13_R1.Items;
-import net.minecraft.server.v1_13_R1.WorldMap;
-import net.minecraft.server.v1_13_R1.WorldServer;
-import org.bukkit.GameMode;
-import org.bukkit.craftbukkit.v1_13_R1.CraftWorld;
-import org.bukkit.craftbukkit.v1_13_R1.inventory.CraftItemStack;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.pixelgalaxy.WerewolfMain;
 import org.pixelgalaxy.game.roles.Role;
 import org.pixelgalaxy.timers.GameDayNightTimer;
 import org.pixelgalaxy.utils.CustomIS;
-import org.pixelgalaxy.utils.RoleMapRenderer;
-import org.pixelgalaxy.utils.ScoreHelper;
 
-import java.time.LocalTime;
 import java.util.*;
 
 public class Game {
@@ -32,59 +22,74 @@ public class Game {
     @Getter private static Set<GamePlayer> gamePlayers = new HashSet<>();
     @Getter private static Map<GamePlayer, GamePlayer> targetMap = new HashMap<>();
 
+    /**
+     * To start the game timer and initialize all players in gameQueue
+     */
+
     public static void start(){
         setStarted(true);
         initGamePlayers();
         GameDayNightTimer.start();
     }
 
+    /**
+     *  Gives player random role and team,
+     *  aswell gives the player items for the game.
+     *
+     * @param p Player to assign role and team
+     * @param team team (color) to assign to player
+     * @param role role for player
+     *
+     */
+
     private static void addGamePlayer(Player p, Team team, Role role){
 
         getGamePlayers().add(GamePlayer.builder().player(p).playerTeam(team).playerRole(role).build());
+        p.getEquipment().setChestplate(CustomIS.getColoredChest(team));
+        CustomIS.giveImageMap(p, role);
+        setRandomCustomName(p);
 
     }
+
+    /**
+     *  Gives the player a random custom name from the config
+     *
+     * @param p to set custom name on
+     */
+
+    private static void setRandomCustomName(Player p){
+        Random random = new Random();
+        int randomName = random.nextInt(customNames.size());
+        String customName = customNames.get(randomName);
+
+        p.setCustomNameVisible(true);
+        p.setCustomName(customName);
+        p.setDisplayName(customName);
+        p.setPlayerListName(customName);
+        customNames.remove(customName);
+    }
+
+    /**
+     * Shuffles the players in gameQueue and initializes their game requirements
+     */
 
     public static void initGamePlayers(){
 
         Collections.shuffle(Lobby.getCurrentPlayers());
         for(Player p : Lobby.getCurrentPlayers()){
 
-
-            addGamePlayer(p, Team.getRandom(), role);
-
-            p.getEquipment().setChestplate(CustomIS.getColoredChest(team));
-
-            net.minecraft.server.v1_13_R1.ItemStack itemStack = new net.minecraft.server.v1_13_R1.ItemStack(Items.FILLED_MAP);
-
-            WorldServer worldServer = ((CraftWorld) p.getWorld()).getHandle();
-            int id = worldServer.b("map");
-
-            WorldMap worldMap = new WorldMap("map_" + id);
-            Role playerRole = Game.getGamePlayers().get(p).getPlayerRole();
-            worldMap.mapView.addRenderer(new RoleMapRenderer(playerRole));
-
-            worldServer.a(worldMap.getId(), worldMap);
-
-            itemStack.getOrCreateTag().setInt("map", id);
-
-            p.getInventory().addItem(CraftItemStack.asBukkitCopy(itemStack));
-
-            ItemMeta mapm = p.getInventory().getItem(0).getItemMeta();
-            mapm.setDisplayName("§7Role: " + playerRole.getRoleName());
-            p.getInventory().getItem(0).setItemMeta(mapm);
-            p.updateInventory();
-
-            p.setCustomNameVisible(true);
-            int randomName = random.nextInt(customNames.size());
-            String customName = customNames.get(randomName);
-            p.setCustomName(customName);
-            p.setDisplayName(customName);
-            p.setPlayerListName(customName);
-            customNames.remove(customName);
-
-            ScoreHelper.updatePlayerScoreboard(p, LocalTime.of(0, 1, 0), "Night");
+            addGamePlayer(p, Team.getRandom(), Role.getRandom());
 
         }
+
+    }
+
+    /**
+     * For checking who killed who in the night and sending
+     * other roles information about their targets
+     */
+
+    public static void checkNightKills(){
 
     }
 

@@ -15,6 +15,12 @@ import org.pixelgalaxy.utils.CustomIS;
 
 public class disableInventoryInteract implements Listener {
 
+    /**
+     * Cancel inventory interaction and check if player clicked on target in color chooser,
+     * if so then place the selected target in the targetmap
+     * @param e InventoryClickEvent
+     */
+
     @EventHandler
     public void onInvInteract(InventoryClickEvent e){
         ItemStack chest = e.getCurrentItem();
@@ -51,6 +57,11 @@ public class disableInventoryInteract implements Listener {
         }
 
     }
+
+    /**
+     * Cancel player dropping items
+     * @param e PlayerDropEvent
+     */
 
     @EventHandler
     public void onDrop(PlayerDropItemEvent e){

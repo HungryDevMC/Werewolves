@@ -12,6 +12,10 @@ public class LobbyTimer extends BukkitRunnable {
 
     private int lobbyCountdown;
 
+    /**
+     * Runnable for checking if current players are higher or equal to minimum players in lobby to start game.
+     */
+
     @Override
     public void run(){
 

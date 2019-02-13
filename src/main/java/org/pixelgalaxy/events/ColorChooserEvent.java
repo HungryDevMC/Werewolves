@@ -9,6 +9,11 @@ import org.pixelgalaxy.utils.CustomIS;
 
 public class ColorChooserEvent implements Listener {
 
+    /**
+     *  When player interacts with the color chooser for setting a target, open the target chooser inventory
+     * @param e PlayerInteract
+     */
+
     @EventHandler
     public void onColorChooser(PlayerInteractEvent e){
 

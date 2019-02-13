@@ -12,6 +12,7 @@ import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
 import org.pixelgalaxy.game.Game;
+import org.pixelgalaxy.game.GamePlayer;
 
 /**
  *
@@ -114,15 +115,23 @@ public class ScoreHelper {
         return s.length()>16 ? s.substring(16) : "";
     }
 
-    public static void updatePlayerScoreboard(Player p, LocalTime time, String dayornight){
+    /**
+     * Update single scoreboard
+     * @param gp Gameplayer for scoreboard update
+     * @param time Localtime for displaying countdown for day/night
+     * @param dayornight String to display day/night
+     */
+
+    public static void updatePlayerScoreboard(GamePlayer gp, LocalTime time, String dayornight){
+        Player p = gp.getPlayer();
         ScoreHelper helper = ScoreHelper.createScore(p);
         helper.setTitle("&4&lWerewolves &8&l- &7&lInfo");
         helper.setSlot(9, "&8&m----------------");
         helper.setSlot(8, "&aName: &7" + p.getCustomName());
         helper.setSlot(7, "&8&m----------------");
-        helper.setSlot(6, "&aColor: &7" + Game.getGamePlayers().get(p).getPlayerTeam().toString());
+        helper.setSlot(6, "&aColor: &7" + gp.getPlayerTeam().getColorName());
         helper.setSlot(5, "&8&m----------------");
-        helper.setSlot(4, "&aRole: &7" + Game.getGamePlayers().get(p).getPlayerRole().getRoleName());
+        helper.setSlot(4, "&aRole: &7" + gp.getPlayerRole().getRoleName());
         helper.setSlot(3, "&8&m----------------");
 
         String extraZero = "";
@@ -135,6 +144,22 @@ public class ScoreHelper {
             helper.setSlot(2, "&a" + dayornight + ": &7" + time.getMinute() + ":" + extraZero + time.getSecond());
         }
         helper.setSlot(1, "&8&m----------------");
+    }
+
+    /**
+     * Update all scoreboards of ingame players
+     * @param dayornight String to display day/night
+     * @param time Localtime for displaying countdown for day/night
+     */
+
+    public static void updateAllPlayerScoreboards(String dayornight, LocalTime time){
+
+        for(GamePlayer gp : Game.getGamePlayers()){
+
+            updatePlayerScoreboard(gp, time, dayornight);
+
+        }
+
     }
 
 }
