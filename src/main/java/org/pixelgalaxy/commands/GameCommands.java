@@ -25,6 +25,7 @@ public class GameCommands implements CommandExecutor {
 
                         if(args[0].equalsIgnoreCase("setspawn")){
                             WerewolfMain.config.set("lobby_location", p.getLocation());
+                            WerewolfMain.plugin.saveConfig();
                             Lobby.setSpawnLoc(p.getLocation());
                             p.sendMessage(WerewolfMain.PREFIX + "You have set the spawn location to your current location.");
                         }else if(args[0].equalsIgnoreCase("skipday")){
@@ -42,6 +43,7 @@ public class GameCommands implements CommandExecutor {
                         if(args[0].equalsIgnoreCase("setspawn")){
 
                             WerewolfMain.config.set("teams." + args[1].toLowerCase() + ".location", p.getLocation());
+                            WerewolfMain.plugin.saveConfig();
                             p.sendMessage(WerewolfMain.PREFIX + "You have set color " + args[1].toLowerCase() + "'s location to your current location.");
 
                         }

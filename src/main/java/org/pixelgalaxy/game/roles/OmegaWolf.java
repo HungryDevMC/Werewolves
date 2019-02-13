@@ -5,11 +5,11 @@ import lombok.Getter;
 import lombok.Setter;
 import org.pixelgalaxy.WerewolfMain;
 
-public class Omegawolf extends Role implements NightRole {
+public class OmegaWolf extends Role implements NightRole {
 
     @Getter @Setter private static boolean isAlive = false;
 
-    public Omegawolf(){
+    public OmegaWolf(){
         super(WerewolfMain.config.getString("role_info.omega.name"), RoleTeam.WOLVES, 1);
         setAlive(true);
     }

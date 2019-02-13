@@ -37,7 +37,7 @@ role_info:
 
   citizen:
     max: 3
-    name: Villager
+    name: Citizen
 
   mayor:
     max: 1
