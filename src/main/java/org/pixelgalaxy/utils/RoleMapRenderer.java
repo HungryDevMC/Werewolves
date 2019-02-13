@@ -1,14 +1,11 @@
 package org.pixelgalaxy.utils;
 
-import lombok.Cleanup;
 import lombok.SneakyThrows;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.map.MapCanvas;
 import org.bukkit.map.MapRenderer;
 import org.bukkit.map.MapView;
 import org.pixelgalaxy.WerewolfMain;
-import org.pixelgalaxy.game.Role;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;

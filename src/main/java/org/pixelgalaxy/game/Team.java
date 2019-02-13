@@ -51,7 +51,9 @@ public class Team {
 
         Random random = new Random();
         int rColorIndex = random.nextInt(availableTeams.size());
-        return (Team)availableTeams.toArray()[rColorIndex];
+        Team team = (Team)availableTeams.toArray()[rColorIndex];
+        availableTeams.remove(team);
+        return team;
     }
 
 }

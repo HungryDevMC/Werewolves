@@ -37,98 +37,31 @@ role_info:
     max: 2
     name: Dorpsgek
 lobby_location:
-  X: 16
-  Y: 30
-  Z: 125
-  W: world
-  Yaw: -179
-  Pitch: -1
 teams:
   blue:
-
-    X: -50
-    Y: 38
-    Z: -17
-    W: world
-    Yaw: -268
-    Pitch: 5
+    rgb: "53:57:157"
   yellow:
-    X: -58
-    Y: 38
-    Z: -28
-    W: world
-    Yaw: -269
-    Pitch: 5
+    rgb: "248:198:39"
   pink:
-    X: -50
-    Y: 38
-    Z: -39
-    W: world
-    Yaw: -270
-    Pitch: 4
+    rgb: "237:141:172"
   brown:
-    X: -36
-    Y: 38
-    Z: -59
-    W: world
-    Yaw: -180
-    Pitch: 3
+    rgb: "114:71:40"
   black:
-    X: -25
-    Y: 38
-    Z: -67
-    W: world
-    Yaw: -180
-    Pitch: -1
+    rgb: "20:21:25"
   gray:
-    X: -14
-    Y: 38
-    Z: -59
-    W: world
-    Yaw: -179
-    Pitch: 5
+    rgb: "142:142:134"
   orange:
-    X: -1
-    Y: 38
-    Z: -37
-    W: world
-    Yaw: -92
-    Pitch: 3
+    rgb: "240:118:19"
   purple:
-    X: 6
-    Y: 38
-    Z: -26
-    W: world
-    Yaw: -90
-    Pitch: 4
+    rgb: "121:42:172"
   aqua:
-    X: -1
-    Y: 38
-    Z: -15
-    W: world
-    Yaw: -90
-    Pitch: 7
+    rgb: "58:175:217"
   green:
-    X: -16
-    Y: 38
-    Z: 6
-    W: world
-    Yaw: -2
-    Pitch: 1
+    rgb: "112:185:25"
   white:
-    X: -27
-    Y: 38
-    Z: 14
-    W: world
-    Yaw: -2
-    Pitch: 0
+    rgb: "233:236:236"
   red:
-    X: -38
-    Y: 38
-    Z: 6
-    W: world
-    Yaw: -356
-    Pitch: -1
+    rgb: "161:39:34"
 names:
   - 'George'
   - 'David'

@@ -9,24 +9,26 @@ import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.inventory.ItemStack;
 import org.pixelgalaxy.WerewolfMain;
 import org.pixelgalaxy.game.Game;
+import org.pixelgalaxy.game.GamePlayer;
 import org.pixelgalaxy.timers.GameDayNightTimer;
+import org.pixelgalaxy.utils.CustomIS;
 
 public class disableInventoryInteract implements Listener {
 
     @EventHandler
     public void onInvInteract(InventoryClickEvent e){
-        ItemStack wool = e.getCurrentItem();
+        ItemStack chest = e.getCurrentItem();
         e.setCancelled(true);
 
         if(ChatColor.stripColor(e.getClickedInventory().getTitle()).equalsIgnoreCase("choose wisely!")){
 
             Player p = (Player) e.getWhoClicked();
 
-            Player target = null;
-            for(Player pGame : Game.getGamePlayers().keySet()){
+            GamePlayer target = null;
+            for(GamePlayer gp : Game.getGamePlayers()){
 
-                if(Game.getGamePlayers().get(pGame).getPlayerTeam().getWoolColor() == wool.getDurability()){
-                    target = pGame;
+                if(CustomIS.getColoredChest(gp.getPlayerTeam()) == chest){
+                    target = gp;
                     break;
                 }
 
@@ -34,11 +36,11 @@ public class disableInventoryInteract implements Listener {
 
             if(target != null) {
 
-                Game.addTarget(p, target);
-                p.sendMessage(WerewolfMain.PREFIX + "You have selected the player: §7" + target.getDisplayName() + " §aas your target!");
+                //Game.addTarget()
+                p.sendMessage(WerewolfMain.PREFIX + "You have selected the player: §7" + target.getCustomName() + " §aas your target!");
                 p.getInventory().setItem(8, null);
                 p.closeInventory();
-                if(Game.getRoleTargetMap().size() >= GameDayNightTimer.amountToSelect){
+                if(Game.getTargetMap().size() >= GameDayNightTimer.amountToSelect){
                     GameDayNightTimer.currentGameTimer.setNightTime(1);
                 }
 

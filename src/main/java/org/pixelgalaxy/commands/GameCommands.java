@@ -6,9 +6,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.pixelgalaxy.WerewolfMain;
 import org.pixelgalaxy.game.Lobby;
-import org.pixelgalaxy.game.Team;
 import org.pixelgalaxy.timers.GameDayNightTimer;
-import org.pixelgalaxy.utils.ConfigSavers;
 
 public class GameCommands implements CommandExecutor {
 
@@ -26,7 +24,7 @@ public class GameCommands implements CommandExecutor {
                     case 1:
 
                         if(args[0].equalsIgnoreCase("setspawn")){
-                            ConfigSavers.saveLocation("lobby_location", p.getLocation());
+                            WerewolfMain.config.set("lobby_location", p.getLocation());
                             Lobby.setSpawnLoc(p.getLocation());
                             p.sendMessage(WerewolfMain.PREFIX + "You have set the spawn location to your current location.");
                         }else if(args[0].equalsIgnoreCase("skipday")){
@@ -43,7 +41,7 @@ public class GameCommands implements CommandExecutor {
 
                         if(args[0].equalsIgnoreCase("setspawn")){
 
-                            ConfigSavers.saveLocation("team_locations." + args[1].toLowerCase(), p.getLocation());
+                            WerewolfMain.config.set("teams." + args[1].toLowerCase(), p.getLocation());
                             p.sendMessage(WerewolfMain.PREFIX + "You have set color " + args[1].toLowerCase() + "'s location to your current location.");
 
                         }

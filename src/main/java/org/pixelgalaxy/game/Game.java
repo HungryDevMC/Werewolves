@@ -11,6 +11,7 @@ import org.bukkit.craftbukkit.v1_13_R1.inventory.CraftItemStack;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.pixelgalaxy.WerewolfMain;
+import org.pixelgalaxy.game.roles.Role;
 import org.pixelgalaxy.timers.GameDayNightTimer;
 import org.pixelgalaxy.utils.CustomIS;
 import org.pixelgalaxy.utils.RoleMapRenderer;
@@ -23,7 +24,6 @@ public class Game {
 
     public static final int NIGHT_CYCLE_TIME = WerewolfMain.config.getInt("cycle_time.night");
     public static final int DAY_CYCLE_TIME = WerewolfMain.config.getInt("cycle_time.day");
-    public static final List<Role> NIGHT_ROLES = Arrays.asList(Role.ALPHA_WOLF, Role.OMEGA_WOLF, Role.HERO, Role.MURDERER, Role.MAYOR, Role.WATCHER, Role.TEMPTRESS, Role.BETA_WOLF);
 
     private static List<String> customNames = WerewolfMain.config.getStringList("names");
 
@@ -49,28 +49,8 @@ public class Game {
         Collections.shuffle(Lobby.getCurrentPlayers());
         for(Player p : Lobby.getCurrentPlayers()){
 
-            p.setGameMode(GameMode.ADVENTURE);
-            p.setAllowFlight(false);
-            p.setFlying(false);
-            Random random = new Random();
-            int randomTeamInt = random.nextInt(teams.size());
-            Team team = teams.get(randomTeamInt);
-            teams.remove(randomTeamInt);
-            Role role;
 
-            if(primaryRoles.size() > 0){
-
-                int randomRoleInt = random.nextInt(primaryRoles.size());
-                role = primaryRoles.get(randomRoleInt);
-                primaryRoles.remove(randomRoleInt);
-
-            }else{
-                int randomRoleInt = random.nextInt(secondaryRoles.size());
-                role = secondaryRoles.get(randomRoleInt);
-                secondaryRoles.remove(randomRoleInt);
-            }
-
-            addGamePlayer(p, team, role);
+            addGamePlayer(p, Team.getRandom(), role);
 
             p.getEquipment().setChestplate(CustomIS.getColoredChest(team));
 

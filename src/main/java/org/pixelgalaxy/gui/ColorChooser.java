@@ -7,18 +7,9 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.pixelgalaxy.game.Game;
+import org.pixelgalaxy.utils.CustomIS;
 
 public class ColorChooser {
-
-    private static ItemStack getPlayerWool(Player p){
-
-        ItemStack wool = new ItemStack(Material.LEGACY_WOOL, 1, (short) Game.getGamePlayers().get(p).getPlayerTeam().getWoolColor());
-        ItemMeta woolm = wool.getItemMeta();
-        woolm.setDisplayName("§7Player: §a" + p.getDisplayName());
-        wool.setItemMeta(woolm);
-
-        return wool;
-    }
 
     public static Inventory getInv(){
         Inventory inv = Bukkit.createInventory(null, 36, "§cChoose wisely!");
@@ -29,11 +20,11 @@ public class ColorChooser {
 
             if(i > 6){
 
-                inv.setItem(i + 12, getPlayerWool(currentPlayer));
+                inv.setItem(i + 12, CustomIS.getColoredChest(currentPlayer));
 
             }else {
 
-                inv.setItem(i + 10, getPlayerWool(currentPlayer));
+                inv.setItem(i + 10, CustomIS.getColoredChest(currentPlayer));
 
             }
         }

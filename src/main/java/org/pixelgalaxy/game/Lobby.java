@@ -7,7 +7,6 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.pixelgalaxy.WerewolfMain;
 import org.pixelgalaxy.timers.LobbyTimer;
-import org.pixelgalaxy.utils.ConfigSavers;
 
 import java.util.ArrayList;
 import java.util.List;
