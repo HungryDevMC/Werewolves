@@ -23,13 +23,13 @@ public class CustomIS {
      * @return chestplate item with color of team
      */
 
-    public static ItemStack getColoredChest(Team team){
+    public static ItemStack getColoredChest(Team team, Player p){
 
         ItemStack chest = new ItemStack(Material.LEATHER_CHESTPLATE);
         LeatherArmorMeta meta = (LeatherArmorMeta) chest.getItemMeta();
         meta.setColor(team.getTeamColor());
+        meta.setDisplayName("§7Player: §a" + p.getCustomName());
         chest.setItemMeta(meta);
-
         return chest;
     }
 
@@ -75,6 +75,20 @@ public class CustomIS {
         p.getInventory().getItem(0).setItemMeta(mapm);
         p.updateInventory();
 
+    }
+
+    /**
+     *
+     * @return barrier block to select no target
+     */
+
+    public static ItemStack getBarrierBlock(){
+        ItemStack barrier = new ItemStack(Material.BARRIER);
+        ItemMeta barrierm = barrier.getItemMeta();
+        barrierm.setDisplayName("§cNone");
+        barrierm.setLore(Arrays.asList("§7Clicking this item will", "§7select nobody"));
+        barrier.setItemMeta(barrierm);
+        return barrier;
     }
 
 }

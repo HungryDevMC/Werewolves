@@ -1,6 +1,5 @@
 package org.pixelgalaxy.events;
 
-import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -8,6 +7,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.pixelgalaxy.game.Game;
 import org.pixelgalaxy.game.Lobby;
+import org.pixelgalaxy.game.PlayerMode;
 
 public class LobbyJoinLeave implements Listener {
 
@@ -19,14 +19,12 @@ public class LobbyJoinLeave implements Listener {
     @EventHandler
     public void onLobbyJoin(PlayerJoinEvent e){
 
+        Player p = e.getPlayer();
         if(!Game.isStarted()) {
-            Player p = e.getPlayer();
-            p.teleport(Lobby.getSpawnLoc());
-            p.getInventory().clear();
-            p.setGameMode(GameMode.ADVENTURE);
-            p.setAllowFlight(true);
-            p.setFlying(true);
+            PlayerMode.set(p, PlayerMode.LOBBY);
             Lobby.addCurrentPlayer(p);
+        }else{
+            PlayerMode.set(p, PlayerMode.SPECTATOR);
         }
 
     }

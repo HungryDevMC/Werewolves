@@ -4,18 +4,13 @@ import lombok.Getter;
 import lombok.Setter;
 import org.pixelgalaxy.WerewolfMain;
 
-public class Hero extends Role implements NightRole {
+public class Hero extends Role {
 
-    @Getter @Setter private static int maxUses = WerewolfMain.config.getInt("role_info.hero.uses");
+    @Getter @Setter private int uses = WerewolfMain.config.getInt("role_info.hero.uses");
 
     public Hero(){
-        super(WerewolfMain.config.getString("role_info.hero.name"), RoleTeam.CITIZENS, WerewolfMain.config.getInt("role_info.hero.max"));
+        super(WerewolfMain.config.getString("role_info.hero.name"), RoleTeam.CITIZENS, WerewolfMain.config.getInt("role_info.hero.max"), WerewolfMain.config.getBoolean("role_info.hero.primary"), 2,
+                true);
     }
-
-    @Override
-    public void playNightRole() {
-
-    }
-
 
 }

@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
+import org.apache.commons.lang3.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -129,7 +130,7 @@ public class ScoreHelper {
         helper.setSlot(9, "&8&m----------------");
         helper.setSlot(8, "&aName: &7" + p.getCustomName());
         helper.setSlot(7, "&8&m----------------");
-        helper.setSlot(6, "&aColor: &7" + gp.getPlayerTeam().getColorName());
+        helper.setSlot(6, "&aColor: &7" + StringUtils.capitalize(gp.getPlayerTeam().getColorName()));
         helper.setSlot(5, "&8&m----------------");
         helper.setSlot(4, "&aRole: &7" + gp.getPlayerRole().getRoleName());
         helper.setSlot(3, "&8&m----------------");

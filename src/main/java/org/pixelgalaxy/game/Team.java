@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.lang3.StringUtils;
+import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.pixelgalaxy.WerewolfMain;
 
@@ -30,7 +31,9 @@ public class Team {
 
         for(String key : WerewolfMain.config.getKeys(true)){
 
-            if(key.matches("teams.[a-zA-Z]$")){
+            Bukkit.broadcastMessage(key);
+
+            if(key.matches("teams.[a-zA-Z]+$")){
 
                 String rgb = WerewolfMain.config.getString(key + ".rgb");
                 availableTeams.add(Team.builder().woolColor(WerewolfMain.config.getInt(key + ".wool_color")).teamColor(Color.fromRGB(
@@ -39,7 +42,7 @@ public class Team {
                     Integer.valueOf(StringUtils.substring(rgb, rgb.indexOf(":") + 1, rgb.lastIndexOf(":"))),
                     Integer.valueOf(StringUtils.substring(rgb, rgb.lastIndexOf(":") + 1, rgb.length()))
 
-                )).colorName(StringUtils.substring(key, key.indexOf("teams.") + 1, key.indexOf("."))).build());
+                )).colorName(StringUtils.substring(key, key.indexOf(".") + 1, key.length())).build());
 
             }
 

@@ -8,6 +8,8 @@ lobby_time: 10
 
 lobby_location:
 
+gallows_location:
+
 # Make sure the amount is not lower then the amount of primary roles!
 
 min_player: 3
@@ -38,45 +40,61 @@ role_info:
   citizen:
     max: 3
     name: Citizen
+    primary: false
 
   mayor:
     max: 1
     name: Mayor
+    primary: true
 
   protector:
     max: 1
     uses: 1
     name: Protector
+    primary: false
 
   temptress:
     max: 1
     name: Temptress
+    primary: false
 
   hero:
     max: 1
     uses: 3
     name: Hero
+    primary: false
 
   watcher:
     max: 1
     name: Watcher
+    primary: false
+
+# Don't increase the wolves their max to more than 1!
 
   alphawolf:
+    max: 1
     name: Alpha Wolf
+    primary: true
 
   betawolf:
+    max: 1
     name: Beta Wolf
+    primary: true
 
   omegawolf:
+    max: 1
     name: Omega Wolf
+    primary: false
 
   murderer:
     max: 1
     name: Murderer
+    primary: false
 
   madman:
     max: 2
     name: Madman
+    primary: false
 
 ###########################################################
 # Player Colours                                          #

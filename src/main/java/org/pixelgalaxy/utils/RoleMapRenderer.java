@@ -21,7 +21,7 @@ public class RoleMapRenderer extends MapRenderer {
     private static List<Player> hasRendered = new ArrayList<>();
 
     public RoleMapRenderer(Role role){
-        this.imageName = role.toString().toLowerCase();
+        this.imageName = role.getClass().getSimpleName().toLowerCase();
     }
 
     /**

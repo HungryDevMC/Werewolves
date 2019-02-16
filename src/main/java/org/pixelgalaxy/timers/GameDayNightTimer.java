@@ -1,5 +1,6 @@
 package org.pixelgalaxy.timers;
 
+import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -10,7 +11,7 @@ import org.pixelgalaxy.game.Game;
 import org.pixelgalaxy.game.GamePlayer;
 import org.pixelgalaxy.game.roles.Alphawolf;
 import org.pixelgalaxy.game.roles.Betawolf;
-import org.pixelgalaxy.game.roles.NightRole;
+import org.pixelgalaxy.game.roles.Hero;
 import org.pixelgalaxy.game.roles.Role;
 import org.pixelgalaxy.utils.CustomIS;
 import org.pixelgalaxy.utils.ScoreHelper;
@@ -25,6 +26,8 @@ public class GameDayNightTimer extends BukkitRunnable {
     public static int amountToSelect = 0;
     public static GameDayNightTimer currentGameTimer = null;
 
+    @Getter private static Time currentTime;
+
     /**
      * Sets the time to night when timer is initiated,
      * saves the current timer object, teleports player to their locations,
@@ -34,18 +37,37 @@ public class GameDayNightTimer extends BukkitRunnable {
      */
     public GameDayNightTimer() {
         currentGameTimer = this;
+        amountToSelect = 0;
+        currentTime = Time.NIGHT;
+        Game.getTargetMap().clear();
         Bukkit.getServer().getWorld("world").setTime(18000);
 
         for (GamePlayer gp : Game.getGamePlayers()) {
             Player p = gp.getPlayer();
             p.getPlayer().teleport((Location) WerewolfMain.config.get("teams." + gp.getPlayerTeam().getColorName().toLowerCase() + ".location"));
             Role playerRole = gp.getPlayerRole();
-            if (playerRole instanceof NightRole) {
+            if (playerRole.isNightRole()) {
 
-                if (!(playerRole instanceof Betawolf) || !Alphawolf.isAlive()) {
+                if (!(playerRole instanceof Betawolf)) {
+
+                    if(gp.getPlayerRole() instanceof Hero){
+                        Hero hero = (Hero) gp.getPlayerRole();
+                        if(hero.getUses() > 0){
+                            p.getInventory().setItem(8, CustomIS.getColorChooser());
+                            amountToSelect++;
+                        }else{
+                            p.sendMessage(WerewolfMain.PREFIX + "§cYou have no more uses as a hero!");
+                        }
+                    }else {
+
+                        p.getInventory().setItem(8, CustomIS.getColorChooser());
+                        amountToSelect++;
+                    }
+                }else if(!Alphawolf.isAlive()){
 
                     p.getInventory().setItem(8, CustomIS.getColorChooser());
                     amountToSelect++;
+
                 }
             }
         }
@@ -71,7 +93,7 @@ public class GameDayNightTimer extends BukkitRunnable {
 
             // Update all nighttimes on scoreboards
             int minutes = (int) Math.floor(nightTime / 60.0);
-            ScoreHelper.updateAllPlayerScoreboards("Night", LocalTime.of(0, minutes, nightTime - (minutes * 60)));
+            ScoreHelper.updateAllPlayerScoreboards(currentTime.getName(), LocalTime.of(0, minutes, nightTime - (minutes * 60)));
             nightTime--;
 
             // When the night is over, remove all color choosers from nightroles their inventories and check the deaths from the night + clear target map for next night.
@@ -80,7 +102,7 @@ public class GameDayNightTimer extends BukkitRunnable {
                 for (GamePlayer gp : Game.getGamePlayers()) {
 
                     Player p = gp.getPlayer();
-                    if (gp.getPlayerRole() instanceof NightRole) {
+                    if (gp.getPlayerRole().isNightRole()) {
                         p.closeInventory();
                         p.getInventory().setItem(8, null);
                     }
@@ -88,13 +110,17 @@ public class GameDayNightTimer extends BukkitRunnable {
 
                 Game.checkNightKills();
                 Game.getTargetMap().clear();
+                for(GamePlayer gp : Game.getGamePlayers()){
+                    gp.getPlayer().getInventory().setItem(8, CustomIS.getColorChooser());
+                }
+                currentTime = Time.DAY;
             }
 
         } else if (dayTime > 0) {
 
             // Update daytime on all scoreboards
             int minutes = (int) Math.floor(dayTime / 60.0);
-            ScoreHelper.updateAllPlayerScoreboards("Day", LocalTime.of(0, minutes, dayTime - (minutes * 60)));
+            ScoreHelper.updateAllPlayerScoreboards(currentTime.getName(), LocalTime.of(0, minutes, dayTime - (minutes * 60)));
             dayTime--;
 
         } else {

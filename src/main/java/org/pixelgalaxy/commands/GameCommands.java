@@ -34,6 +34,12 @@ public class GameCommands implements CommandExecutor {
                             GameDayNightTimer timer = new GameDayNightTimer();
                             timer.runTaskTimer(WerewolfMain.plugin, 0, 20);
 
+                        }else if(args[0].equalsIgnoreCase("setgallows")){
+
+                            WerewolfMain.config.set("gallows_location", p.getLocation());
+                            WerewolfMain.plugin.saveConfig();
+                            p.sendMessage(WerewolfMain.PREFIX + "You have succesfully set the gallows location to your current location!");
+
                         }
 
                         break;

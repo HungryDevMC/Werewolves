@@ -13,28 +13,26 @@ import org.pixelgalaxy.utils.CustomIS;
 public class ColorChooser {
 
     /**
-     *
      * @return Inventory with all the other player chestplates and custom names on the item,
      * to select them as target.
      */
 
-    public static Inventory getInv(){
+    public static Inventory getInv() {
         Inventory inv = Bukkit.createInventory(null, 36, "§cChoose wisely!");
 
-        for(int i = 0; i<Game.getGamePlayers().size(); i++){
+        // 10 - 16, 19 - 25, 28 - 34
 
-            GamePlayer currentPlayer = (GamePlayer) Game.getGamePlayers().toArray()[i];
+        for (int i = 1; i < Game.getGamePlayers().size() + 1; i++) {
 
-            if(i > 6){
+            GamePlayer currentPlayer = (GamePlayer) Game.getGamePlayers().toArray()[i - 1];
 
-                inv.setItem(i + 12, CustomIS.getColoredChest(currentPlayer.getPlayerTeam()));
+            inv.setItem((10 + (i - 1) + (2 * ((int)Math.floor(i/6.0)))), CustomIS.getColoredChest(currentPlayer.getPlayerTeam(), currentPlayer.getPlayer()));
 
-            }else {
-
-                inv.setItem(i + 10, CustomIS.getColoredChest(currentPlayer.getPlayerTeam()));
-
-            }
         }
+
+        int lastIndex = Game.getGamePlayers().size();
+        inv.setItem((10 + lastIndex + (2 * ((int)Math.floor(lastIndex/6.0)))), CustomIS.getBarrierBlock());
+
         return inv;
     }
 
