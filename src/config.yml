@@ -10,6 +10,12 @@ lobby_location:
 
 gallows_location:
 
+soundloc:
+
+# If you don't want to use the resource pack, then we disable the sounds and custom skins etc
+
+resource_pack: true
+
 # Make sure the amount is not lower then the amount of primary roles!
 
 min_player: 3

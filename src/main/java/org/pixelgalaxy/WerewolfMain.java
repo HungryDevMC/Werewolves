@@ -6,9 +6,11 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.pixelgalaxy.commands.GameCommands;
+import org.pixelgalaxy.commands.SkipDay;
 import org.pixelgalaxy.events.ColorChooserEvent;
 import org.pixelgalaxy.events.LobbyJoinLeave;
 import org.pixelgalaxy.events.disableInventoryInteract;
+import org.pixelgalaxy.events.disableMovement;
 import org.pixelgalaxy.game.Team;
 import org.pixelgalaxy.game.roles.Role;
 
@@ -21,6 +23,10 @@ public class WerewolfMain extends JavaPlugin {
     public static WerewolfMain plugin;
     public static FileConfiguration config;
     public static final String PREFIX = "§8§l[§4§lWereWolves§8§l] §a";
+
+    // set name above player head
+    // Fix scoreboard flicker
+    // Send werewolves who other werewolves are
 
     /**
      * Create default config, register commands listeners,
@@ -42,17 +48,20 @@ public class WerewolfMain extends JavaPlugin {
 
                 new LobbyJoinLeave(),
                 new ColorChooserEvent(),
-                new disableInventoryInteract()
+                new disableInventoryInteract(),
+                new disableMovement()
 
         ));
 
         registerCommands(Arrays.asList(
 
-                "game"
+                "game",
+                "skipday"
 
         ), Arrays.asList(
 
-                new GameCommands()
+                new GameCommands(),
+                new SkipDay()
 
         ));
 

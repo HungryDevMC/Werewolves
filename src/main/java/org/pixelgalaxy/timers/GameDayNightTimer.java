@@ -5,6 +5,8 @@ import lombok.Setter;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.pixelgalaxy.WerewolfMain;
 import org.pixelgalaxy.game.Game;
@@ -44,6 +46,7 @@ public class GameDayNightTimer extends BukkitRunnable {
 
         for (GamePlayer gp : Game.getGamePlayers()) {
             Player p = gp.getPlayer();
+            p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 999999, 3, true, true));
             p.getPlayer().teleport((Location) WerewolfMain.config.get("teams." + gp.getPlayerTeam().getColorName().toLowerCase() + ".location"));
             Role playerRole = gp.getPlayerRole();
             if (playerRole.isNightRole()) {
@@ -112,6 +115,7 @@ public class GameDayNightTimer extends BukkitRunnable {
                 Game.getTargetMap().clear();
                 for(GamePlayer gp : Game.getGamePlayers()){
                     gp.getPlayer().getInventory().setItem(8, CustomIS.getColorChooser());
+                    gp.getPlayer().removePotionEffect(PotionEffectType.BLINDNESS);
                 }
                 currentTime = Time.DAY;
             }

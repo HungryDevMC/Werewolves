@@ -2,9 +2,11 @@ package org.pixelgalaxy.game;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.bukkit.Bukkit;
+import org.bukkit.*;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.pixelgalaxy.WerewolfMain;
+import org.pixelgalaxy.commands.SkipDay;
 import org.pixelgalaxy.game.roles.*;
 import org.pixelgalaxy.timers.GameDayNightTimer;
 import org.pixelgalaxy.utils.CustomIS;
@@ -33,6 +35,9 @@ public class Game {
     @Getter
     private static List<GamePlayer> heroTargets = new ArrayList<>();
 
+    @Getter
+    private static final boolean resourcePackOn = WerewolfMain.config.getBoolean("resource_pack");
+
     /**
      * To start the game timer and initialize all players in gameQueue
      */
@@ -59,6 +64,11 @@ public class Game {
         CustomIS.giveImageMap(p, role);
         setRandomCustomName(p);
         PlayerMode.set(p, PlayerMode.INGAME);
+        if ((p.isOp() || p.hasPermission("skipday")) && SkipDay.getGameMaster() == null) {
+
+            SkipDay.setGameMaster(p);
+
+        }
 
     }
 
@@ -86,6 +96,11 @@ public class Game {
 
     public static void initGamePlayers() {
 
+        if (isResourcePackOn()) {
+            Location soundLoc = (Location) WerewolfMain.config.get("soundloc");
+            Bukkit.getServer().getWorld("world").playSound(soundLoc, Sound.MUSIC_DISC_11, 100.0F, 0.5F);
+        }
+
         Collections.shuffle(Lobby.getCurrentPlayers());
         for (Player p : Lobby.getCurrentPlayers()) {
 
@@ -108,8 +123,8 @@ public class Game {
         List<GamePlayer> gpKeys = new ArrayList<>(Game.getTargetMap().keySet());
         Collections.sort(gpKeys, new RolePrioritySorter());
 
-        for(GamePlayer gp : gpKeys){
-            if(Game.getTargetMap().get(gp) != null) {
+        for (GamePlayer gp : gpKeys) {
+            if (Game.getTargetMap().get(gp) != null) {
                 sortedMap.put(gp, Game.getTargetMap().get(gp));
             }
         }
@@ -152,7 +167,7 @@ public class Game {
 
                             }
 
-                            if(playersVisited.size() > 0) {
+                            if (playersVisited.size() > 0) {
                                 StringBuilder sb = new StringBuilder();
                                 sb.append(playersVisited.get(0).getPlayer().getCustomName());
                                 playersVisited.remove(playersVisited.get(0));
@@ -160,7 +175,7 @@ public class Game {
                                     sb.append(", " + gpVisit.getPlayer().getCustomName());
                                 }
                                 gp.getPlayer().sendMessage(WerewolfMain.PREFIX + "§aThe players: §7" + sb.toString() + " §ahave visited §7" + target.getPlayer().getCustomName() + " §athis night!");
-                            }else{
+                            } else {
                                 gp.getPlayer().sendMessage(WerewolfMain.PREFIX + "Nobody has visited §7" + target.getCustomName() + " §atonight!");
                             }
 
@@ -211,11 +226,14 @@ public class Game {
                             heroTargets.add(target);
                             Bukkit.broadcastMessage(target.getCustomName() + " has been added to the hero targets!");
                             ((Hero) gp.getPlayerRole()).setUses(((Hero) gp.getPlayerRole()).getUses() - 1);
-                            gp.getPlayer().sendMessage(WerewolfMain.PREFIX + "You have §7" + ((Hero)gp.getPlayerRole()).getUses() + " §auses remaining!");
+                            gp.getPlayer().sendMessage(WerewolfMain.PREFIX + "You have §7" + ((Hero) gp.getPlayerRole()).getUses() + " §auses remaining!");
 
                             break;
 
                         case "OMEGAWOLF":
+
+                            Bukkit.broadcastMessage("Alpha: " + Alphawolf.isAlive());
+                            Bukkit.broadcastMessage("Beta: " + Betawolf.isAlive());
 
                             if (!Alphawolf.isAlive() && !Betawolf.isAlive()) {
 
@@ -322,16 +340,22 @@ public class Game {
 
         }
 
-        if(roleTeamAlive.size() <= 1) {
+        if (roleTeamAlive.size() <= 1) {
             if (roleTeamAlive.size() == 1) {
                 Bukkit.broadcastMessage(WerewolfMain.PREFIX + "The team: §7" + roleTeamAlive.get(0).getTeamName() + "§a has won the game!");
             } else if (roleTeamAlive.size() == 0) {
                 Bukkit.broadcastMessage(WerewolfMain.PREFIX + "Everyone was killed! Nobody has won the game.");
             }
-            for(GamePlayer gp : Game.getGamePlayers()){
+            for (GamePlayer gp : Game.getGamePlayers()) {
                 PlayerMode.set(gp.getPlayer(), PlayerMode.SPECTATOR);
             }
-            Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "restart");
+            new BukkitRunnable() {
+
+                @Override
+                public void run() {
+                    Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "restart");
+                }
+            }.runTaskLater(WerewolfMain.plugin, 200);
         }
     }
 

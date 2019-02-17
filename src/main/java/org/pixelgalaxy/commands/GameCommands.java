@@ -40,6 +40,10 @@ public class GameCommands implements CommandExecutor {
                             WerewolfMain.plugin.saveConfig();
                             p.sendMessage(WerewolfMain.PREFIX + "You have succesfully set the gallows location to your current location!");
 
+                        }else if(args[0].equalsIgnoreCase("soundloc")){
+                            WerewolfMain.config.set("soundloc", p.getLocation());
+                            WerewolfMain.plugin.saveConfig();
+                            p.sendMessage(WerewolfMain.PREFIX + "You have succesfully set the sound location to your current location!");
                         }
 
                         break;

@@ -4,6 +4,8 @@
     <root id="archive" name="Werewolves.jar">
       <element id="library" level="project" name="spigot-1.13" />
       <element id="module-output" name="Werewolves" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/plugin.yml" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/config.yml" />
     </root>
   </artifact>
 </component>

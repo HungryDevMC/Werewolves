@@ -91,4 +91,14 @@ public class CustomIS {
         return barrier;
     }
 
+    public static ItemStack getYesNoStack(){
+
+        ItemStack gallows = new ItemStack(Material.LEAD);
+        ItemMeta gallowsm = gallows.getItemMeta();
+        gallowsm.setDisplayName("§aKill player?");
+        gallowsm.setLore(Arrays.asList("§7With this item you can", "§7choose whether or not you", "§7want to kill the player on", "§7the gallows."));
+        gallows.setItemMeta(gallowsm);
+        return gallows;
+    }
+
 }
